@@ -13,16 +13,16 @@ echo " "
 	sudo apt autoclean
 echo " "
 #espera 2 segundo
-echo -e "\e[0;38;5;208m██ Se actualiso los paquetes del sistema\e[0m" && sleep 2s
+echo -e "\e[0;38;5;208m██ Se actualiso los paquetes del sistema\e[0m" ; sleep 2s
     	sudo apt install nala -y
-    echo -e "\e[0;38;5;208m█ nala installed and run\e[0m" && sleep 3s
-clear && bash bashi/installMenu.sh
+    echo -e "\e[0;38;5;208m█ nala installed and run\e[0m" ; sleep 3s
+clear ; bash bashi/installMenu.sh
 clear
-echo -ne 'Terminando: - \r' && sleep 0.3
-echo -ne 'Terminando: \ \r' && sleep 0.3
-echo -ne 'Terminando: | \r' && sleep 0.3
-echo -ne 'Terminando: / \r' && sleep 0.3
-echo -ne 'Terminando: OK \r' && sleep 1s
+echo -ne 'Terminando: - \r' ; sleep 0.3
+echo -ne 'Terminando: \ \r' ; sleep 0.3
+echo -ne 'Terminando: | \r' ; sleep 0.3
+echo -ne 'Terminando: / \r' ; sleep 0.3
+echo -ne 'Terminando: OK \r' ; sleep 1s
 echo -ne '\n'
 echo " "
     neofetch
