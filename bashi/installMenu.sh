@@ -31,17 +31,22 @@ echo "	2.-Instalar paquetes dpkg, .deb"
 echo "	3.-Instalar utilidades de impresión y plantillas" 
 echo "	4.-Instalar soporte de Flatpak y paquetes" 
 echo "	5.-Instalar paquetes adicionales ala carta." 
+echo "	6.-Instalar impresora SamsumgM2022."
+echo "	7.-Instalar temas para Gnome 42.9, TemaWhiteSur" 
+echo "	8.-Instalar temas para la terminal"
 echo " "
 echo "	q.-Salir" 
 echo " "
 read -p "OPCIÓN: " OPCION
 case $OPCION in
-a) clear && bash bashi/installRepo.sh;; 
-1) clear && bash bashi/installCLI.sh;; 
-2) clear && bash bashi/installDPKG.2sh;;
-3) clear && bash bashi/installCUPS.sh;;
-4) clear && bash bashi/installFlatpak.sh;;
-5) clear && bash bashi/pakAlacarta.sh;;
+a) clear ; bash bashi/installRepo.sh;; 
+1) clear ; bash bashi/installCLI.sh;; 
+2) clear ; bash bashi/installDPKG.sh;;
+3) clear ; bash bashi/installCUPS.sh;;
+4) clear ; bash bashi/installFlatpak.sh;;
+5) clear ; bash bashi/pakAlacarta.sh;;
+6) clear ; bash bashi/SamsumgM2022/M2020Install.sh;;
+7) clear ; bash bashi/TemaWhiteSur/InstallWhiteSur.sh;;
 
 q) date ; sleep 2s ; exit;;
 *) echo " OPCIÓN NO VÁLIDA "
