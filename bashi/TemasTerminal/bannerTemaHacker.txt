@@ -1,0 +1,40 @@
+echo "                                      ..                                                  
+                                      lo.                                               
+                                      od.                                                 
+                                      od..:c:,.                                           
+                                      .' ,k0ko'                                           
+                                          .''..                                           
+                                            .... .:,                                      
+                                 .,clc.    ,ddo:.,oollc'...                               
+                               .,ldddo.    :kd,.cddddddodko,.                             
+                             .,ldddddoc,.  'c:;;odddddddocdk,                             
+               ,;            ;ddddddxkOkl'   .:xddddddddl;;:.           .;c:.             
+              .ox.           ;ddddddxkkxko;;;;ldddddddddddl;.           ,kd,.             
+             'lxd.           ;dddddddddddddddddddddddddddddd'           'x;               
+             ....            ;dddddddddddddddddddddddddddddo'       ...  ..               
+                             ;ddddollllloddddodddolllllodddo'      ,ddc.                  
+                 ..        .'ldlcc'    .;loddodol,.   .;lodo'      'lo:.                  
+                .dl        ,kOx'         'oddoxl.       .ldo'                             
+                .dl        .:dx:.        'odddxl.       .oxo'                             
+                .do          ;dxc.      'cdxddxo:.      .oxo'                             
+                 '.          ;ddo:.    .ll''''',oc     'coxo'         .:,                 
+               ', .;'        .'lddl::::cd;     .co:::::oddc.       'lllkl.;l.             
+              .cl..ooc'        ;olllodddd:.':;..ldddoollll,        .','.;oxx'             
+             'ldc..odoo:.       . ..;ddddolodoolodddo,....      .,llloc.;xko.             
+             .:oo,;odddl.           .coddddddddddddl:.        .,lddddddoddl;.             
+               ';;;;;;oo.  ..'.     .';coo;ldoc:do:,'.    ..',lddddl;;;;;;.               
+                      .;:, ,dxo:,,. .,. '. .,'. '. .,. .,,cdxdxo;;,.                      
+                       .dd..'ldddxl;;,.            .;;:oxdxd:',.                          
+                       .okl' ...,oddddc::'      ,:;lddddl'..                              
+                        ....     ...;odddoc'   ..,lol,...                                 
+                                     .;lloooccl:..'..           ..                        
+                                   .......:ododdooo;...       .;d:                        
+                    .;;,.      ...;ododl,. .;:::odododl,...   ,okc                        
+                    .cxOl' .'',lxdddddxo:.      'cdxddddddc''' .;'                        
+                    .,;::' 'dxddddxdc,,.         .',,lddddddxo.  .,;,.                    
+                  .,ldl,.  'odddl,''.                .'';odddoc' .'',:cclc'               
+                  .ldddoc::lodl,.                        .;ooodoc::::,'':x;               
+                   .:dddddd:...                            ...cdddddo'   .                
+                  .coddddoc'                                  ,lodddoo:.                  
+                  .;lddoc,                                     .;ldddl,                   
+                    .;:,.                                        .;:,."
