@@ -15,7 +15,9 @@
 	tar -Jxvf ./packs/YaruEX-Natural2024.tar.xz -C $HOME/.icons && sleep 1s
 		 
 	mkdir $HOME/.themes && sleep 1s
-	cp -r ./packs/temas/* $HOME/.themes
+	#cp -r ./packs/temas/* $HOME/.themes
+	tar -Jxvf ./packs/temas.tar.xz -C $HOME/.themes ; sleep 1s
+	
 		 
 	#sudo cp ./bashi/activities.svg /usr/share/themes/WhiteSur-Dark-purple/gnome-shell/assets && sudo cp ./bashi/view-app-grid.svg /usr/share/themes/WhiteSur-Dark-purple/gnome-shell/assets
 	
