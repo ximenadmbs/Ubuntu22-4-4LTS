@@ -1,346 +1,185 @@
-# Ubuntu Server 22, y Xubuntu 22:
+## Pos-instalación
 
-### 1. Instaciones, una ves instalado el sistema actialisar el sistemas: ✅
+En una maquina virtual la red debe estar configurada como **adaptador puente**  para ver la ded local **server-xeon** mas sobre redes: [[DireccionRedes100.txt]]
+		
+		smb://192.168.100.22/xena
+		usuario: xenon
+		passw: *****
+### Correr el instalador .sh
+#### Instalaciones, una ves instalado el sistema actualizar el sistemas: 
 
-	sudo apt update
-  
-	sudo apt upgrade
-  
-	sudo apt autoclean
-  
-### 2. Instalamos el servisio SSH para la su administracion remota, asi podremos copiar y pegar comandos desde otro pc con asistencia grafica. ✅ ✅
+- Ejecutas el instalador **installApps-UbuntuLTS.sh** , correrán la actualizaciones, y la instalación del gestor de paquetes nala. 
 
-    sudo apt install ssh -y
+		sudo apt update && sudo apt upgrade -y && sudo apt autoclean
+		sudo apt install nala -y
+#### Poner archivos en carpetas
+- Por alguna extraña razón al instalar y desinstalar paquetes **snap**, esta barre con las carpetas de usuario que estén vacías, rompiendo y dejando inservibles como **enlace simbólico rotos**, así que de inicio ve poniendo un archivo oculto en todas las carpetas **.txt** sin contenido, de mayor importancia en la carpeta **Escritorio**.
 
-## poner archivos en carpetas
-- por alguna extrana razon al instalar y desistalar paquetes snap, esta barre con lascarpetas de usuario que esten vasias, rompiendo y dejando inservibles como enlace simbolico, asi que de inicio ve poniendo un archivo oculto en todas las carpetas .txt sin contenido.
+		cd ~/Escritorio/ ; touch .txt && cd ~/Descargas/ ; touch .txt && cd ~/Documentos/ ; touch .txt && cd ~/Imágenes/ ; touch .txt && cd ~/Música/ ; touch .txt && cd ~/Público/ ; touch .txt && cd ~/Vídeos/ ; touch .txt
 
-### 2.1 Revisamos el estabo del servicio , tendra que estar en enable. ✅ ✅
+#### Ruta de ejecución del instalador
+Dentro del instalador se manejan las direcciones internas en la carpeta asignando como **./** ala carpeta "madre" : **Ubuntu22-4-4LTS** , así le decimos ala terminal que ./ "estamos aquí en la carpeta", por ejemplo para que la terminal sepa que estamos dentro de la carpeta **Ubuntu22-4-4LTS**
 
-    sudo service ssh status
+		~/Descargas/Ubuntu22-4-4LTS/installApps-UbuntuLTS.sh
+		./installApps-UbuntuLTS.sh
 
----------------------------------------
-## 3. Una ves en el terminal con asistencia grafica y conectado via remota con SSH seguiremos los sig pasos: ✅ ✅
-Crearremos un archivo de instrucciones para la instalacion de paquetes nesesarios.
-Dentro dela carpeta rais de usuario ~/ crearemos el siguiente archivo .sh
+Así partes siempre desde ./ que es la carpeta del proyecto y apartir de aqui te mueves dentro en las carpetas y los archivos.
 
-    touch installUbuntuServ.sh
+		~/Documentos/Git_Proyectos/Ubuntu22-4-4LTS/bashi/
+		./bashi/
 
-> Lo editaremos con nano.
-
-    sudo nano installUbuntuServ.sh
-
-Copiamos y pegamos el contenido del archivo **installUbuntuServ.sh, o installApps-XubuntuLTS.sh** guardamos y cerramos damos permisos de ejecucion, y ejecutamos las instrucciones con.
-
-    sudo chmod 777 installUbuntuServ.sh
-
-    ./installUbuntuServ.sh
-
+		~/Documentos/Git_Proyectos/Ubuntu22-4-4LTS/bashi/installMenu.sh
+		./bashi/installMenu.sh
 
 ---------------------------------------
-## 4. Se instalaran los siguientes apps para el terminal. ✅
-
-* sudo add-apt-repository universe
-* sudo apt install ubuntu-restricted-extras -y
-* sudo apt install neofetch -y
-* sudo apt install samba -y
-* sudo apt install bpytop -y  (opcion)
-* sudo apt install lm-sensors -y
-* sudo apt install ufw -y
-* sudo apt install fish -y
-* sudo apt install htop -y
-* sudo apt install net-tools -y
-* sudo apt install proftpd -y
-
----------------------------------------
-### 4.1 Revisamos el estabo del servicio , tendra que estar en enable. ✅
-
-    sudo service smbd status
-  
-### 4.2 Revisamos el estabo del servicio , tendra que estar en enable. ✅
-
-    sudo service ufw status
-
-    sudo ufw status
-
-Activar y desactivar el servicio si es nesesario:
-> Activar
-
-    sudo ufw enable
-
-> Desactivar
-
-    sudo ufw disable
-
----------------------------------------
-# 5 Configurar el servicio FTP ✅
-
-Revisamos el estado del servicio FTP:
-
-    sudo service proftpd status
-
-### 5.1 Conficuarcion del archivo. brimos y editamos con Nano:
-
-    sudo nano /etc/proftpd/proftpd.conf
-
-Modificaremos el archivo, creamos una copia de seguridad , borramos el contenido y pegaremos las siguientes lineas guardamos y cerramos recatamos el servicio.
-
-``` bash
-Include /etc/proftpd/modules.conf
-UseIPv6 on
-<IfModule mod_ident.c>
-        IdentLookups off
-    </IfModule>
-        ServerName "Ubuntu22"
-        ServerType standalone
-        DeferWelcome off
-        DefaultServer on
-        ShowSymlinks on
-        TimeoutNoTransfer 600
-        TimeoutStalled 600
-        TimeoutIdle 1200
-        DisplayLogin welcome.msg
-        DisplayChdir .message true
-        ListOptions "-l"
-        DenyFilter \*.*/
-        Port 21
-<IfModule mod_dynmasq.c>
-    </IfModule>
-        MaxInstances 30
-        User proftpd
-        Group nogroup
-        Umask 022 022
-        AllowOverwrite on
-        TransferLog /var/log/proftpd/xferlog
-        SystemLog /var/log/proftpd/proftpd.log
-    <IfModule mod_quotatab.c>
-        QuotaEngine off
-</IfModule>
-    <IfModule mod_ratio.c>
-        Ratios off
-</IfModule>
-    <IfModule mod_delay.c>
-        DelayEngine on
-</IfModule>
-    <IfModule mod_ctrls.c>
-        ControlsEngine off
-        ControlsMaxClients 2
-        ControlsLog /var/log/proftpd/controls.log
-        ControlsInterval 5
-        ControlsSocket /var/run/proftpd/proftpd.sock
-</IfModule>
-    <IfModule mod_ctrls_admin.c>
-        AdminControlsEngine off
-    </IfModule>
-        Include /etc/proftpd/conf.d/
-
-AccessGrantMSG "Binvenida"
-AccessDenyMSG ":::ERROR AL CONECTAR:::"
-
-DefaultRoot ~ 
-```
-
-### 5.2 Recargar el servicio:
-
-    sudo service proftpd reload
-
----------------------------------------
-# 6 Cambiar a ip estatica  [conoscamos la ip] ✅
-
-    sudo nano /etc/netplan/00-installer-config.yaml
-
-Pegar el contenido en el archivo
-
+#### Se instalaran los siguientes apps . 
+para el terminal desde el instalador, si usar el instalador *bash* este es el listado de programas que se instalan.
 ```bash
-# This is the network config written by 'subiquity'
-network:
-  ethernets:
-    enp0s3:
-      addresses: [192.168.100.150/24]
-      gateway4: 192.168.100.1
-      nameservers:
-        addresses: [192.168.100.1, 8.8.8.8]
-  version: 2
-  ```
+#Seccion de Instalacion de paquetes para la terminal:
+    sudo nala install neofetch htop bpytop lm-sensors deborphan -y
+    echo -e "\e[0;38;5;208m█ neofetch, htop, bpytop, lm-sensors, deborphan, installed \e[0m" ; sleep 1s
+    sudo nala install fish cmatrix -y
+    echo -e "\e[0;38;5;208m█ fish, cmatrix installed \e[0m" ; sleep 1s
+    sudo nala install ssh net-tools samba nmap -y
+    echo -e "\e[0;38;5;208m█ ssh, net-tools, samba, nmap, installed \e[0m" ; sleep 1s
+    		
+	sudo nala install mc links2 -y
+	echo -e "\e[0;38;5;208m█ midnight commander, links2 (navegador web cli), installed \e[0m" ; sleep 1s
+	
+#deprecated
+    #sudo nala install cmake alien -y
+```
+* sudo add-apt-repository universe
+* sudo apt install ubuntu-restricted-extras -y [Commonly used media codecs and fonts for Ubuntu] , se esta ejecutando desde el **installDPKG.sh**
+* sudo apt install ufw -y [programa para gestionar un cortafuegos Netfilter]
+* sudo apt install proftpd -y [Servidor del protocolo de transferencia de archivos (FTP)]
+* 
+#### Instalacion de repositorios
+En el ejecutable, **installRepo.sh** , 
+- universe
+- ppa:appimagelauncher-team/stable
+- flathub https://flathub.org/repo/flathub.flatpakrepo
+- ppa:helkaluin/webp-pixbuf-loader
 
-* Donde la dirección addresser .150 la cambiaremos por la dirección que desairemos.
+#### Instalación de paquetes ala carta
+Opción 5, del menú del instalador.
+En el ejecutable, **pakAlacarta.sh** encuentras toda la paquetera utilizable. 
+![[Captura desde 2024-04-15 21-49-33.png]]
 
-* gateway4 es la dirección donde nos conectamos al rauter que es la puerta de enlace. esta dirección la copiamos en la linea addresser.
+#### Notas dela instalacion de LTS 22.04.4
+1:21pm - 2:13pm
+- flatpak esta instalado en su vercion 1.12.7-1
+- libfuse2 esta instalado
+-  ⚠El en apartado de instalación delos paquetes de **flatpak** dieron error de instalación
+- Obsidian en snap no se instalo, incluir **install obsidian --classic**
 
-Para aplicar los cambios ejecutamos el siguiente comando:
+		sudo snap install obsidian --classic
+		
+-  🔴Error de instalacion en .deb **, dropbox, peazip, veracrypt** (not found), esto fue porque no hay vercion en deb, dropbox se instalara directo de la tienda, peazip en flatpak, y veracript desde su pagina,
 
-    sudo netplan apply
+		sudo flatpak install flathub io.github.peazip.PeaZip
+	
+	https://www.veracrypt.fr/en/Downloads.html
+	- Ejecute de nuevo la opción 8 instalación desatendida
+	> ya se están instalando los flatpak
+### Reseteo del pc
+Actualizar "soporte de idiomas"
 
-### 7 Cambiar zona horaria ✅
+Encender el teclado iluminado 
 
-    sudo dpkg-reconfigure tzdata
+		xset led 3
+		xset led off
 
-[America] [mexico cd mexico]
+Una ves que ayas terminado de instalar con la consola el bash **installApps-UbuntuLTS.sh**, reinicias el pc y comienza con la instalaron de las extensiones: [[Exenciones Gnome]]
+- Abre en Utilidades, Retoques y en Apariencia, personaliza los Iconos - YaruEX Natural2024, y en GNOME shell - WhiteSur-Dark-purple.
+
+#### Personaliza la interface.
+Configuración de las Tipografías tamaños , abre "retoques"
+![[tipografias.png]]
 
 ---------------------------------------
-#### 8 Configuracion del servicio de carpetas compartidas samba ✅
-
-Abrimos el archivo de configuración para pegar los siguientes lineas.
-
-    sudo nano /etc/samba/smb.conf 
-
-> Pegamos:
-
-``` bash
-=====Share Definitions=====
-
-[sambaShare]
-	valid users = ximena
-	path = /home/ximena/carpetaRED
-	read only = no
-	browseable = yes
-```
-* **[sambaShare]** : sera el nombre de identificación de la dirección a la carpeta.
-
-* **valid user**: sera los usuario validos que podrán leer la carpeta.
-
-* **path**: sera la dirección local de la carpeta u unidad a compartir en la red.
-
-* **read only**: sera la opción de lectura solamente sera [no]
-
-* **browseable**: si la carpeta podrá ser vista en los buscadores esta como [yes]
-
-### 8.1 Dardemos de alta alos usuario las credenciales de acceso:
-
-    sudo smbpasswd -a ximena
-
-> [ximena se refiere al usuario que tendrá las credenciales necesarias para leer y modificar la carpeta compartida].
-
-Las siguientes lineas las llenaremos con es password para el usuario:
-
-    New SMB password:
-    Retype new SMB password:
-
-> [contraseña y confirmar]
-
-Reiniciamos el serbicio samba:
-
-    sudo service smbd restart
-
-Accitamos el contrafiego, dando de alta el puerto del servicio samba si es necesario.
-
-    sudo ufw allow samba
-
->(Confirmara con Reglas actualizadas , v6)
-
-### 8.2 Anotaciones finales de samba: conoser la direccion de la carpeta compartida:
-Cualquier de los dos comondos es valido para seber la ip:
-
-    ifconfig
-    ip a
-
-y construimos la direccion de la siguiente manera:
-smb://192.168.1.150/sambaShare/
-
----------------------------------------
-### 9 Configuraciones para discos en equipos red, por ssh ✅
-Cuando al querer copiar un archivo no se puede en un disco interno montado como ntfs de windows.
-revisamos las letras de los discos:
-
-    sudo fdisk -l
-
-nos fijamos en la ruta:
-
-```
-Dispositivo   Comienzo      Final   Sectores Tamaño Tipo
-/dev/sdd1         2048   97243135   97241088  46.4G Datos básicos de Microsoft
-/dev/sdd2     97243136 1073803263  976560128 465.7G Datos básicos de Microsoft
-/dev/sdd3   1073803264 7814035455 6740232192   3.1T Datos básicos de Microsoft
-```
-Donde montaremos la particion:  **/dev/sdd2**  de la sig forma: 
-
-> Desmontamos y ejecutamos: 
-
-    sudo ntfsfix /dev/sdd2
-
->linea de salida constestacion:
-
-``` bash
-ximena@pc-amdfx:~$ sudo ntfsfix /dev/sdd2
-Mounting volume... OK
-Processing of $MFT and $MFTMirr completed successfully.
-Checking the alternate boot sector... OK
-NTFS volume version is 3.1.
-NTFS partition /dev/sdd2 was processed successfully.
-```
-
-### 9.1 Para montajes simples de un dispositivo usb o una unidad de disco externa:
-Crearemos la carpeta donde se alijara la unidad:
-
-    mkdir /mnt/hddrosa
-
-y con siguiente instrucción montaremos la unidad:
-
-    sudo mount /dev/sde2 /mnt/hddrosa
-
-> Donde previamente sabemos el nombre de la unidad **/dev/sde2** del ejercicio anterior.
-
-Para desmontar con el siguiente comando:
-
-    sudo umount /dev/sde2
-
-### Instalar interfas grafica de Xubuntu
-
-    sudo apt install --no-install-recommends xubuntu-desktop
-
----------------------------------------
-
 ### Paqueteria instalada:
 
-# Snap
-jdowloader2
-krita* (se rompio despues de querer desistalar el imagemagick)
-spotify
+#### Snap 
+- jdowloader2
+- krita* [se rompio despues de querer desistalar el [[ImageMagick]]
+- spotify
+- pdf arrager
+- obsidian
 
-# Flatpak
-calibre
-Discord inc
-google
-selector de color
-ariana
-VLC
-ExtensionManager
+#### AppImage #appppImage
+* kdenlive-22.08.3-x86_x64_8b0f1934c0385c03bf0720861baa215a
+* appimagepool-5.0.0-x86_64_57f732b9d7f041f503bd0afa0bdd6cb3
+* balenaEtcher-1.18.11-x64_5137b0c85d3b1050aab7591325f008fb
+* deemix-linux-x64-latest_bbab66ef19292a883ddb8708e9c2677f
 
-# .deb de la tienda
-wine
-krita
-firefox
-inkscape
-wps
-k3b
-edge
-notepadqq
-tilix
+#### Flatpak #flatpak
+- calibre
+- Discord inc
+- google
+- selector de color
+- ariana
+- VLC
+- ExtensionManager
 
+#### Paquetes .deb de sus paginas
+> Estos paquetes tienen copias en el servidor.
+- Chrome
+- ffconverter
+- onedriver [quedo obsoleto
+- peazip
+- veracrypt
+- wps office
+- Visual estidio code
+- webapp-manager  [quedo obsoleto
+- edge
 
-## poner archivos en carpetas
-- por alguna extrana razon al instalar y desistalar paquetes snap (emulador dosbox), esta barre con lascarpetas de usuario que esten vasias, rompiendo y dejando inservibles como enlace simbolico, asi que de inicio ve poniendo un archivo oculto en todas las carpetas .txt sin contenido.
+#### De la tienda Gnome formato .deb
+- wine
+- krita
+- firefox
+- inkscape
+- k3b
+- notepadqq
+- tilix
+- foliate [lector de libros ,epub, pero me guta mas **ariana**]
+- kompozer
+- Gestor de extensiones
+- Gestor tipografico
+- Darktable (fotografia)
+- HandBrake (videos audio)
 
-# Tema de Firefox 
+### Configuraciones para la terminal.
+![[Captura de pantalla de 2024-04-13 20-38-55.png]]
+#### Configuraciones de la interfaces gráfica
+![[Captura de pantalla de 2024-04-13 20-39-25.png]]
+#### Tema de Firefox 
+> Desinstalar Firefox en formato snap e instalar en formato .deb *si por alguna razón no funcionan las aplicaciones web por ser snap* [[Desistalar Firefox version Snap]]
 
-- instalar Firefox Color
-
+* Instalar Aplicsciones web en Firefox. [[FirefoxAddon Pwas]]*
+- Instalar Firefox Color, Link del tema
 		https://color.firefox.com/?theme=XQAAAAIZAQAAAAAAAABBqYhm849SCia2CaaEGccwS-xMDPr4zmCk-pWgdupc86JBvd1E8G7op8zBPYc2KKtk7a7XxqoELfAddCy4XHYEexXA7Nc_KrjsFLVi9iT9r_SwduHN10rUP1Aa71jgna09VdriOHjkY1ga1UyF_aUfoHKNa95Qh_O5aGMkZ-an0jq--aNh1FSChVjp3P_89P3uXdrPO9F6HXSCCd73Z6-p9rv2OoX2euibzCsOmsyplRNaeoXK_ffZM-A
-		
-# Krita .deb en espanol
-- si instale el krita desde la tienda en formato .deb vendra en ingles, para ponerlo en espanol:
+
+#### Krita .deb en espanol
+- si instale el krita desde la tienda en formato .deb vendrá en ingles, para ponerlo en español:
+
 		sudo nala install krita-l10n
-		
-### Para cambiar permiso edicion de una carpeta y su contenido:
 
-		sudo chmod o+w . -R
-		
-Ruta temas: /home/ximena/.themes
+### Aplicaciones web
+En firefox instala la intencional pwas:  https://addons.mozilla.org/es/firefox/addon/pwas-for-firefox/ , Direcciones de algunas paginas web con webapps. [[WebsApps]]
 
-### Crear enlaces simbolicos:
+#### Para cambiar permiso edición de una carpeta y su contenido:
+[[ComandosCarpeta]] Ruta temas: 
 
-		sudo ln -s /var/spool/cups-pdf/ximenam ~/PDFs
-		
+		/home/ximena/.themes
+#### Crear enlaces simbolicos:
+[[ComandosCarpeta]]
+
+Eligió la instalación desatendida de paquetes  
+
 
 jue 10 nov 2022 11:07:46 CST
 mar 06 dic 2022 13:17:46 CST
+lun 15 abr 2024 21:57:07 CST
+
+
