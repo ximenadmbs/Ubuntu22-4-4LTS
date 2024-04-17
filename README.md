@@ -4,7 +4,7 @@ En una maquina virtual la red debe estar configurada como **adaptador puente**  
 		
 		smb://192.168.100.22/xena
 		usuario: xenon
-		passw: 14789
+		passw: *****
 ### Correr el instalador .sh
 #### Instalaciones, una ves instalado el sistema actualizar el sistemas: 
 
