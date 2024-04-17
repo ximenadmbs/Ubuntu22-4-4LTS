@@ -14,7 +14,7 @@ echo "----------------------------------------------------"
 #Instalación de Firefox a través de Apt (no Snap)
 
 #Paso 1 : desinstale Firefox Snap:
-	sudo snap remove firefox
+	sudo nala remove firefox
 	sleep 2s
 
 #Paso 2 : cree un conjunto de claves APT (si aún no existe):
@@ -38,7 +38,7 @@ echo "----------------------------------------------------"
 	sleep 2s
 
 #Paso 6 : Finalmente, instale Firefox DEB en Ubuntu:
-	sudo apt update && sudo apt install firefox
+	sudo nala update && sudo nala install firefox
 
 #Fuente : https://www.omgubuntu.co.uk/2022/04/how-to-install-firefox-deb-apt-ubuntu-22-04
 

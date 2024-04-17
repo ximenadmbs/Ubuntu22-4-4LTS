@@ -21,33 +21,35 @@ echo -e "\e[0;38;5;159m     ''       '    ''''''''         \e[0m"
 echo " "
 echo "Ximena bash scrip [Versión 2.4.24]"
 echo "(c) Corporation. Todos los derechos reservados." 
-echo -e "\e[0;38;5;208m[Actualizador e intalador de complementos para Ubuntu 22.4.4 LTS\e[0m" 
-echo -e "\e[0;38;5;208m[Se iniciará la instalación.]\e[0m" 
-	echo "-----------------------------------------------------------------------" 
+echo -e "\e[0;38;5;208m[Actualizador e intalador de complementos para Ubuntu 22.4.4 LTS ] \e[0m" 
+echo -e "\e[0;38;5;208m[Se iniciará la instalación.                                     ] \e[0m" 
+	             echo "------------------------------------------------------------------" 
 	echo " SELECCIONA UNA OPCIÓN:" 
-echo "	a.-Instalar repositorios" 
+echo "	0.-Instalar repositorios" 
 echo "	1.-Instalar paquetes CLI, aplicaciones de terminal" 
 echo "	2.-Instalar paquetes dpkg, .deb" 
 echo "	3.-Instalar utilidades de impresión y plantillas" 
 echo "	4.-Instalar soporte de Flatpak y paquetes" 
-echo "	5.-Instalar paquetes adicionales ala carta." 
-echo "	6.-Instalar impresora SamsumgM2022."
-echo "	7.-Instalar temas para Gnome 42.9, TemaWhiteSur" 
-echo "	8.-Instalar temas para la terminal"
+echo "	5.-Instalar impresora SamsumgM2022."
+echo "	6.-Instalar temas para Gnome 42.9, TemaWhiteSur" 
+echo "	7.-Instalar temas para la terminal"
+echo "	8.-Instalar paquetes adicionales ala carta." 
+echo "	9.-Instalacion desatendida, opcion 0-7"
 echo " "
 echo "	q.-Salir" 
 echo " "
 read -p "OPCIÓN: " OPCION
 case $OPCION in
-a) clear ; bash bashi/installRepo.sh;; 
+0) clear ; bash bashi/installRepo.sh;; 
 1) clear ; bash bashi/installCLI.sh;; 
 2) clear ; bash bashi/installDPKG.sh;;
 3) clear ; bash bashi/installCUPS.sh;;
 4) clear ; bash bashi/installFlatpak.sh;;
-5) clear ; bash bashi/pakAlacarta.sh;;
-6) clear ; bash bashi/SamsumgM2022/M2020Install.sh;;
-7) clear ; bash bashi/TemaWhiteSur/InstallWhiteSur.sh;;
-
+5) clear ; bash packs/m2020Install.sh;;
+6) clear ; bash packs/InstallWhiteSur.sh;;
+7) clear ; bash TemasTerm/tilix-color-Install.sh;;
+8) clear ; bash bashi/pakAlacarta.sh;;
+9) clear ; bash bashi/installTodo.sh;;
 q) date ; sleep 2s ; exit;;
 *) echo " OPCIÓN NO VÁLIDA "
 exit 1;;
@@ -57,11 +59,8 @@ exit 0
 #Ejecutar con ./installApps-UbuntuLTS.sh
 
 # mié 09 sep 2022 12:52:45 CDT
-# mié 28 sep 2022 21:06:45 CDT
 # sáb 29 oct 2022 17:32:42 CDT
-# mar 01 nov 2022 13:01:05 CST
 # mié 30 nov 2022 12:57:06 CST
-# dom 04 dic 2022 13:20:49 CST
 # sáb 17 dic 2022 19:14:01 CST
 # mar 03 ene 2023 19:53:42 CST
 # mar 02 abr 2024 15:13:55 CST
